@@ -1,0 +1,10 @@
+/* src\index.css */
+@import "tailwindcss";
+@plugin "daisyui";
+
+@layer base {
+  /* Styling struggles with password manager */
+  input[data-com-onepassword-filled] {
+    background-clip: text;
+  }
+}
