@@ -1,4 +1,3 @@
-// src\components\UI\Navbar.tsx
 import { Link, NavLink, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useAuth } from "@/contexts";
@@ -21,59 +20,65 @@ const Navbar = () => {
 
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `nav-pill${isActive ? " nav-pill-active" : ""}`;
+
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          Travel journal
-          <span role="img" aria-labelledby="airplane">
-            🛫
+    <header className="app-header">
+      <nav className="app-navbar" aria-label="Main navigation">
+        <Link to="/" className="brand" aria-label="Travel Journal home">
+          <span className="brand-mark" aria-hidden="true">
+            TJ
           </span>
-          <span role="img" aria-labelledby="heart">
-            ❤️
+          <span className="brand-copy">
+            <span className="brand-title">Travel Journal</span>
+            <span className="brand-subtitle">Stories worth remembering</span>
           </span>
         </Link>
-      </div>
 
-      <div className="flex-none items-center gap-3">
-        {user && (
-          <div className="hidden sm:block text-sm opacity-80">
-            Welcome back {fullName || user.email}
-          </div>
-        )}
-
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-
+        <div className="nav-right">
           {user && (
-            <li>
-              <NavLink to="/create">Create post</NavLink>
-            </li>
+            <div className="welcome-copy">
+              <span className="welcome-label">Welcome back</span>
+              <strong>{fullName || user.email}</strong>
+            </div>
           )}
 
-          {!user && (
-            <>
-              <li>
-                <NavLink to="/register">Register</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            </>
-          )}
+          <div className="nav-actions">
+            <NavLink to="/" className={navLinkClass} end>
+              Home
+            </NavLink>
 
-          {user && (
-            <li>
-              <button type="button" onClick={handleLogout}>
+            {user && (
+              <NavLink to="/create" className={navLinkClass}>
+                Create post
+              </NavLink>
+            )}
+
+            {!user && (
+              <>
+                <NavLink to="/register" className={navLinkClass}>
+                  Register
+                </NavLink>
+                <NavLink to="/login" className={navLinkClass}>
+                  Login
+                </NavLink>
+              </>
+            )}
+
+            {user && (
+              <button
+                type="button"
+                className="nav-pill nav-pill-logout"
+                onClick={handleLogout}
+              >
                 Log out
               </button>
-            </li>
-          )}
-        </ul>
-      </div>
-    </div>
+            )}
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 

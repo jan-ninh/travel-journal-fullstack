@@ -1,4 +1,3 @@
-// src\components\Posts\PostCard.tsx
 import { Link } from "react-router";
 import { useAuth } from "@/contexts";
 
@@ -30,37 +29,49 @@ const PostCard = ({
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl">
-      <figure className="bg-white h-48">
-        <img src={image} alt={title} className="object-cover h-full w-full" />
-      </figure>
+    <article className="journal-card">
+      <Link to={`/post/${_id}`} className="journal-card-image-link">
+        <figure className="journal-card-image-wrap">
+          <img
+            src={image}
+            alt={title}
+            className="journal-card-image"
+            loading="lazy"
+          />
+          <div className="journal-card-image-overlay" aria-hidden="true" />
+          <span className="journal-card-tag">Journal entry</span>
+        </figure>
+      </Link>
 
-      <div className="card-body h-56">
-        <h2 className="card-title">{title}</h2>
-        <p className="truncate text-wrap">{content}</p>
+      <div className="journal-card-body">
+        <div>
+          <h2 className="journal-card-title">{title}</h2>
+          <p className="journal-card-content">{content}</p>
+        </div>
 
-        <div className="mt-4 flex gap-2">
-          <Link to={`/post/${_id}`} className="btn btn-primary">
-            Read More
+        <div className="journal-card-actions">
+          <Link to={`/post/${_id}`} className="primary-action">
+            Explore story
+            <span aria-hidden="true">→</span>
           </Link>
 
           {isOwner && (
-            <>
-              <Link to={`/edit/${_id}`} className="btn">
+            <div className="owner-actions">
+              <Link to={`/edit/${_id}`} className="secondary-action">
                 Edit
               </Link>
               <button
                 type="button"
-                className="btn btn-error"
+                className="secondary-action danger-action"
                 onClick={handleDelete}
               >
                 Delete
               </button>
-            </>
+            </div>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
