@@ -11,6 +11,9 @@ const RootLayout = () => {
       <main className="app-main">
         <Outlet />
       </main>
+      <footer className="app-footer" aria-label="Copyright">
+        <span>© 2026 Jan Ninh</span>
+      </footer>
     </div>
   );
 };

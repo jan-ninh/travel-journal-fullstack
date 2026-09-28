@@ -53,6 +53,32 @@ button {
 
 .app-shell {
   min-height: 100vh;
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.82);
+  outline-offset: 3px;
 }
 
 .app-header {
@@ -197,24 +223,24 @@ button {
 }
 
 .app-main {
-  padding: 58px 0 84px;
+  padding: 44px 0 76px;
 }
 
 .home-page {
   display: grid;
-  gap: 54px;
+  gap: 42px;
 }
 
 .home-hero {
   position: relative;
   display: flex;
-  min-height: 250px;
+  min-height: 210px;
   align-items: end;
   justify-content: space-between;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 28px;
-  padding: 46px 50px;
+  padding: 36px 46px;
   background:
     radial-gradient(circle at 82% 26%, rgba(34, 211, 238, 0.16), transparent 28%),
     radial-gradient(circle at 72% 88%, rgba(124, 58, 237, 0.2), transparent 32%),
@@ -258,10 +284,10 @@ button {
   max-width: 760px;
   margin: 12px 0 14px;
   color: #ffffff;
-  font-size: clamp(2.7rem, 6vw, 5.4rem);
+  font-size: clamp(2.35rem, 4.5vw, 4.15rem);
   font-weight: 850;
   letter-spacing: -0.055em;
-  line-height: 0.97;
+  line-height: 1;
 }
 
 .home-title span {
@@ -309,7 +335,7 @@ button {
   align-items: end;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: -28px;
+  margin-bottom: -18px;
 }
 
 .section-heading h2 {
@@ -524,6 +550,27 @@ button {
   color: #fecaca;
 }
 
+.app-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 35;
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(6, 13, 23, 0.74);
+  color: rgba(148, 163, 184, 0.64);
+  backdrop-filter: blur(14px);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
 input[data-com-onepassword-filled] {
   background-clip: text;
 }
@@ -607,7 +654,7 @@ input[data-com-onepassword-filled] {
   }
 
   .home-title {
-    font-size: clamp(2.35rem, 14vw, 3.8rem);
+    font-size: clamp(2.15rem, 12vw, 3.35rem);
   }
 
   .section-heading {
