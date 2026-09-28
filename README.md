@@ -1,25 +1,25 @@
 # Travel Journal Full Stack
 
-A three-part full-stack web application built with React, TypeScript, Node.js, Express and MongoDB. It connects a React SPA with a dedicated authentication service and a separate data API, with a focus on authentication, authorization and reliable data flows across service boundaries.
+A full-stack travel journal built with React, TypeScript, Node.js, Express and MongoDB. The application connects a React SPA with a dedicated authentication service and a separate data API, with a strong focus on authentication, authorization and multi-service data flows.
 
 ![Travel Journal application preview](docs/travel-journal-preview.png)
 
-## What this project demonstrates
+## Implementation highlights
 
 - React and TypeScript SPA with protected and guest-only routes
 - Dedicated Express authentication service and separate Express data API
-- JWT access tokens and opaque refresh tokens with database-backed rotation
-- httpOnly cookies with automatic access-token refresh and one-time request retry
+- JWT access tokens with database-backed refresh-token rotation
+- httpOnly cookies, session recovery and automatic access-token refresh with one-time request retry
 - Role-based and ownership-based authorization enforced by the API
-- MongoDB/Mongoose, Zod validation and full-stack debugging across client, API, auth and database
+- MongoDB/Mongoose, Zod validation and end-to-end debugging across client, APIs and database
 
 ## Architecture
 
 ![Travel Journal architecture](docs/architecture.png)
 
-The client communicates with two backend services. The auth service handles registration, login, logout, session recovery and token refresh. The data API owns journal posts and verifies access tokens for protected operations.
+The client communicates with two backend services. The auth service handles registration, login, logout, session recovery and token refresh. The data API manages journal entries and verifies access tokens for protected operations.
 
-More detailed diagrams: [Auth flow](docs/auth-flow.png) | [Data flow](docs/data-flow.png)
+Detailed flow diagrams: [Auth flow](docs/auth-flow.png) | [Data flow](docs/data-flow.png)
 
 ## Tech stack
 
@@ -31,40 +31,53 @@ More detailed diagrams: [Auth flow](docs/auth-flow.png) | [Data flow](docs/data-
 
 **Tooling:** Git, npm, ESLint, Postman
 
-## My contribution
+## Repository structure
 
-This project was developed during my Full Stack Web and App Development training at WBS Coding School. My work focused on integrating and debugging the authentication and authorization flow across the three applications.
+```text
+travel-journal-fullstack/
+├── auth-service/   # Authentication, users, tokens and session recovery
+├── data-api/       # Journal entries, protected routes and authorization
+├── client/         # React SPA and auth-aware UI
+└── docs/           # Preview and architecture diagrams
+```
 
-- Login, registration, logout and session recovery
-- AuthContext, protected routing and client-side refresh/retry behavior
-- Role checks and ownership authorization across frontend and API
-- Data flow and debugging across React, Express and MongoDB
+<details>
+<summary><strong>Run locally</strong></summary>
 
-I also rebuilt the core authentication flow in a separate learning pass with minimal guidance to verify my understanding of the underlying concepts.
+### 1. Configure environment variables
 
-## Run locally
+Use the provided `.env.example` files as templates.
 
-Before starting, copy the provided `.env.example` files to `.env.development.local` in both backend services and to `.env` in the client. Both backend services must use the same `ACCESS_JWT_SECRET` and MongoDB database.
+The auth service and data API must use the same `ACCESS_JWT_SECRET` and MongoDB database.
+
+### 2. Start the auth service
 
 ```bash
-# Terminal 1
 cd auth-service
 npm install
 npm run dev
+```
 
-# Terminal 2
+Default port: `3000`
+
+### 3. Start the data API
+
+```bash
 cd data-api
 npm install
 npm run dev
+```
 
-# Terminal 3
+Default port: `8000`
+
+### 4. Start the React client
+
+```bash
 cd client
 npm install
 npm run dev
 ```
 
-Default ports:
+Default port: `5173`
 
-- Auth service: `3000`
-- Data API: `8000`
-- React client: `5173`
+</details>
